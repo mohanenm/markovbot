@@ -6,16 +6,19 @@ from markovbot import MarkovBot
 
 bot = MarkovBot()
 bot2 = MarkovBot()
+
 ''' 
 clean data for shakespeare
 '''
+
+'''
 data = open("shakeComplete.txt", 'r').read()
 fOne = ''.join(filter(lambda x: not x.isdigit(), data))
-fTwo = (re.sub('[-,_[@#*"%;()}]', " ", fOne))
+fTwo = (re.sub('[-,_[@?#*"%;()}]', " ", fOne))
 fThree = (fTwo.replace("SCENE", " "))
 fFour = (fThree.replace("ACT", " "))
-#finalDataShake = fFour
-
+finalDataShake = fFour
+'''
 '''freud'''
 dirname = os.path.dirname(os.path.abspath(__file__))
 freudText = os.path.join(dirname, 'freudCompleteWorks.txt')
@@ -24,9 +27,14 @@ freudTweets =  bot.generate_text(25)
 print(freudTweets)
 
 '''cleaned Shakespeare'''
-dirname = os.path.dirname(os.path.abspath(__file__))
 finalDataShake = os.path.join(dirname, 'shakeComplete.txt')
-bot2.read(finalDataShake)
+data = open(finalDataShake).read()
+fOne = ''.join(filter(lambda x: not x.isdigit(), data))
+fTwo = (re.sub('[-,_[@?#*"%;()}]', " ", fOne))
+fThree = (fTwo.replace("SCENE", " "))
+fFour = (fThree.replace("ACT", " "))
+finalSText = fFour
+bot2.read(finalSText)
 shakeTweets = bot2.generate_text(15)
 print(shakeTweets)
 
